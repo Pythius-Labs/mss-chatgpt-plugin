@@ -1,7 +1,7 @@
 import json
-from flask import Flask, request, send_from_directory
+from flask import Flask, jsonify, request, send_from_directory, current_app
 import requests
-from quart import request, jsonify
+#from quart import request, jsonify
 
 _BASE_URL = "https://webservices.mss1.com/MSSSubconAPI"
 _AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibWVsbGlzIiwibmFtZWlkIjoiNjU3MDkiLCJuYmYiOjE2OTQ1NTIwMzgsImV4cCI6MTY5NDYzODQzOCwiaWF0IjoxNjk0NTUyMDM4LCJpc3MiOiJNU1MifQ.AP7LBO164u950VbizVBE6Cm9fy-2ESFiuWDphqxxAKs"
@@ -25,7 +25,8 @@ def serve_openapi_yaml():
 @app.get('/contacts')
 async def _contacts_get():
     response = requests.get(f'{_BASE_URL}/contacts', headers=headers)
-    return jsonify(response.json()), response.status_code
+    responsejson = response.json()
+    return jsonify(responsejson), response.status_code
 
 @app.get('/damage_claim')
 async def _damage_claim_get():
@@ -121,8 +122,7 @@ async def _updatedjobs_get():
 def main():
     #import uvicorn
     #uvicorn.run("main:app", host="localhost", port=8000)
-    with app.app_context():
-        app.run(debug=True, host="0.0.0.0", port=5003)
+    app.run(debug=True, host="0.0.0.0", port=5003)
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True, host="0.0.0.0", port=5003)
