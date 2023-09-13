@@ -121,7 +121,8 @@ async def _updatedjobs_get():
 def main():
     #import uvicorn
     #uvicorn.run("main:app", host="localhost", port=8000)
-    app.run(debug=True, host="0.0.0.0", port=5003)
+    with app.app_context():
+        app.run(debug=True, host="0.0.0.0", port=5003)
 
 if __name__ == "__main__":
     main()
