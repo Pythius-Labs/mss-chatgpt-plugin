@@ -1,0 +1,391 @@
+info:
+  description: A plugin that allows the user to interact with the MSSSubconAPI endpoints
+    using ChatGPT.
+  title: MSSSubconAPI Plugin
+  version: v1
+openapi: 3.0.1
+paths:
+  /contacts:
+    get:
+      operationId: get__contacts
+      responses:
+        '200':
+          description: OK
+      summary: Gets the list of the Subcontractor's contacts.  Technician, Office,
+        Owner, etc
+  /damage_claim:
+    get:
+      operationId: get__damage_claim
+      responses:
+        '200':
+          description: OK
+      summary: ''
+  /damage_claim/{job_num}:
+    get:
+      operationId: get__damage_claim_{job_num}
+      parameters:
+      - description: ''
+        in: path
+        name: job_num
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: ''
+  /damage_claim/{job_num}/note:
+    get:
+      operationId: get__damage_claim_{job_num}_note
+      parameters:
+      - description: ''
+        in: path
+        name: job_num
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: ''
+  /damage_claim/{job_num}/picture:
+    get:
+      operationId: get__damage_claim_{job_num}_picture
+      parameters:
+      - description: ''
+        in: path
+        name: job_num
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: "returns picture infos including a url to the picture file. \r\nThat\
+        \ url has the current token in the params as that is needed to access a file"
+  /damage_claim/{job_num}/service:
+    get:
+      operationId: get__damage_claim_{job_num}_service
+      parameters:
+      - description: ''
+        in: path
+        name: job_num
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: ''
+  /job-search:
+    get:
+      operationId: get__job-search
+      parameters:
+      - description: ''
+        in: query
+        name: job_num
+        required: false
+        schema:
+          type: string
+      - description: ''
+        in: query
+        name: shipper_name
+        required: false
+        schema:
+          type: string
+      - description: ''
+        in: query
+        name: invoice_num
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Gets the list of jobs that need to be done
+  /jobs:
+    get:
+      operationId: get__jobs
+      parameters:
+      - description: jobs only for this date
+        in: query
+        name: service_date
+        required: true
+        schema:
+          type: string
+      - description: "use access level of user to determine what jobs show. Mosette-always\
+          \ true\r\n            \tBolt does not use this and Bolt must show only those\
+          \ jobs dispatched to current login"
+        in: query
+        name: access_level
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Gets the list of jobs that need to be done
+  /jobs/{job_id}:
+    get:
+      operationId: get__jobs_{job_id}
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: get 1 job
+    patch:
+      operationId: patch__jobs_{job_id}
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: ''
+  /jobs/{job_id}/arrived:
+    put:
+      operationId: put__jobs_{job_id}_arrived
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Informs MSS that the tech has arrived at the job location
+  /jobs/{job_id}/authorization:
+    put:
+      operationId: put__jobs_{job_id}_authorization
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Informs MSS that a job need authorization
+  /jobs/{job_id}/crates:
+    get:
+      operationId: get__jobs_{job_id}_crates
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Gets the list of crates for a job
+  /jobs/{job_id}/doc:
+    get:
+      operationId: get__jobs_{job_id}_doc
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Gets the list of docs for a job
+    post:
+      operationId: post__jobs_{job_id}_doc
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Upload doc
+  /jobs/{job_id}/done:
+    put:
+      operationId: put__jobs_{job_id}_done
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Informs MSS if the job was completed or was unable to be completed
+  /jobs/{job_id}/invoice:
+    post:
+      operationId: post__jobs_{job_id}_invoice
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: creates the invoice doc and posts it
+  /jobs/{job_id}/msscontacts:
+    get:
+      operationId: get__jobs_{job_id}_msscontacts
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Gets the list of MSS Contacts for a job
+  /jobs/{job_id}/notes:
+    get:
+      operationId: get__jobs_{job_id}_notes
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Gets the list of notes for a job
+    post:
+      operationId: post__jobs_{job_id}_notes
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: ''
+  /jobs/{job_id}/onmyway:
+    put:
+      operationId: put__jobs_{job_id}_onmyway
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Informs MSS of the current location of the tech on route to a job.
+  /jobs/{job_id}/phones:
+    get:
+      operationId: get__jobs_{job_id}_phones
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Gets the list of phone numbers for a job
+  /jobs/{job_id}/pictures:
+    get:
+      operationId: get__jobs_{job_id}_pictures
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Gets the list of pictures for a job
+    post:
+      operationId: post__jobs_{job_id}_pictures
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Upload JobPix
+  /jobs/{job_id}/services:
+    get:
+      operationId: get__jobs_{job_id}_services
+      parameters:
+      - description: ''
+        in: path
+        name: job_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      summary: Gets the list of services (not crates) for a job
+  /login:
+    post:
+      operationId: post__login
+      responses:
+        '200':
+          description: OK
+      summary: Authenticates the user
+  /new-jobs:
+    get:
+      operationId: get__new-jobs
+      responses:
+        '200':
+          description: OK
+      summary: Gets the list of new jobs
+  /schedule_status_subcon:
+    get:
+      operationId: get__schedule_status_subcon
+      responses:
+        '200':
+          description: OK
+      summary: ''
+  /updated-jobs:
+    get:
+      operationId: get__updated-jobs
+      responses:
+        '200':
+          description: OK
+      summary: Gets the list of new jobs
+servers:
+- url: http://localhost:5003
