@@ -16,7 +16,7 @@ def index():
 
 @app.route('/.well_known/ai_plugin.json')
 def serve_mss_api_plugin():
-    return send_from_directory('.', 'mss-plugin.json')
+    return send_from_directory('.', 'mss-api-plugin.json')
 
 @app.route('/openapi.yaml')
 def serve_openapi_yaml():
