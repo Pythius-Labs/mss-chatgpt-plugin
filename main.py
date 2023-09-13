@@ -1,6 +1,5 @@
 import json
-import quart
-import quart_cors
+from flask import Flask, request, send_from_directory
 import requests
 from quart import request, jsonify
 
@@ -9,7 +8,19 @@ _AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibWVsbGlzIiwibmFt
 headers = {'Authorization':f'Bearer {_AUTH_TOKEN}','accept':'application/json','Content-Type':'application/json'}
 
 
-app = quart_cors.cors(quart.Quart(__name__), allow_origin="https://chat.openai.com")
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return 'Hello World'
+
+#@app.route('/.well_known/ai_plugin.json')
+#def serve_mss_api_plugin():
+#    return send_from_directory('.', 'mss-plugin.json')
+
+@app.route('/openapi.yaml')
+def serve_openapi_yaml():
+    return send_from_directory('.', 'mss-api-plugin.yaml')   
 
 @app.get('/contacts')
 async def _contacts_get():
