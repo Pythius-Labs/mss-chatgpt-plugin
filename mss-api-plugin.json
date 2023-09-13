@@ -1,0 +1,17 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "MSS API Plugin",
+    "name_for_model": "mssApiPlugin",
+    "description_for_human": "Get current information on dispatch jobs.",
+    "description_for_model": "Get current information on jobs, dispatch jobs. Always choose the best API endpoint based on what the user is asking for.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "https://mss-api-chatgpt-plugin.onrender.com/openapi.yaml"
+    },
+    "logo_url": "https://mss-api-chatgpt-plugin.onrender.com/logo.png",
+    "contact_email": "support@example.com",
+    "legal_info_url": "https://example.com/legal"
+}
